@@ -20,6 +20,9 @@ Index!!!
                 送信
             </button>
         </form>
+        @if ($posts->isNotempty())
+        <p>中身があるよ</p>
+        @endif
     </main>
     <footer>
     </footer>
