@@ -33,7 +33,7 @@ class PostController extends Controller
         $post->content = $request->input("content");
         $post->save();
 
-        return redirect("/posts");
+        return redirect()->route("posts.index");
     }
 
     /**
@@ -49,7 +49,9 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::find($id);
+
+        return view("post.edit", ["posts"=>$post]);
     }
 
     /**
@@ -65,6 +67,9 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->route("posts.index");
     }
 }

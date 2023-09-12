@@ -34,9 +34,21 @@
     @if ($posts->isNotEmpty())
     <p class="text-xl font-bold text-black-500 ">過去の投稿</p>
     @foreach ($posts as $post)
-    <div class="border border-gray-300 mb-4">
-        <h2 class="text-l font-bold">{{ $post->title }}</h2>
-        <p>{{ $post->content }}</p>
+    <div class="border border-gray-300 mb-4 flex justify-between">
+        <div>
+            <h2 class="text-l font-bold">{{ $post->title }}</h2>
+            <p>{{ $post->content }}</p>
+        </div>
+        <div class="flex">
+            <form action="/posts/{{$post->id}}/edit" method="get">
+                <button class="rounded border bg-yellow-500 p-3 " type="submit">編集</button>
+            </form>
+            <form class="ml-2" action="/posts/{{$post->id }}" method="post">
+                @csrf
+                @method("DELETE")
+                <button class="rounded border bg-yellow-500 p-3 flex-1 " type="submit">削除</button>
+            </form>
+        </div>
     </div>
     @endforeach
     @else
